@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Statistical Analysis</title>
+</head>
+<body>
+
+    <a class="home-btn" href="/">Home</a>
+    <div class="intro-overlay" id="introOverlayStats">
+        <div class="intro-wrap">
+            <div class="intro-stack" id="introStackStats">
+            </div>
+            <div class="intro-controls">
+                <div style="color:rgba(255,255,255,0.7)">Press Next to reveal more</div>
+                <button class="intro-btn" id="introNextStats">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page stats-page">
+        <h1 class="stats-title">A Quick Look at the Data</h1>
+
+        <div class="stats-hub">
+            <a class="card stat-card" href="/stats/economic">
+                <h3>The Relationship Between Assimilation and Immigrant Wages</h3>
+                <p>Morgan Raux</p>
+            </a>
+
+            <a class="card stat-card" href="/stats/psychological">
+                <h3>Family and Youth Development: Some Concepts and Findings Linked to The Ecocultural and Acculturation Models</h3>
+                <p>John W Berry</p>
+            </a>
+
+            <a class="card stat-card" href="#" id="conclusionCard">
+                <h3>Conclusion</h3>
+                <p>Summary and final thoughts</p>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Conclusion overlay (opens when user clicks Conclusion card) -->
+    <div class="intro-overlay" id="conclusionOverlay" style="display:none;">
+        <div class="intro-wrap">
+            <div class="intro-stack" id="conclusionStack">
+            </div>
+            <div class="intro-controls">
+                <div style="color:rgba(255,255,255,0.7)">Press Next to reveal more</div>
+                <button class="intro-btn" id="conclusionNext">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // stats page intro overlay content
+        const introParagraphsStats = [
+            `Both Nguyen and Fitzgerald warn against the radical reinvention of one’s identity in the pursuit of success, such as in the case of assimilation, but do these arguments hold true under the scrutiny of real world data?`,
+            `Let’s evaluate this argument through the lens of two different studies, one exploring the economic benefits of conforming to the host countries societal norms and another evaluating the psychological impacts of assimilation vs integration on immigrants.`
+        ];
+
+        const introStackStats = document.getElementById('introStackStats');
+        const introNextStats = document.getElementById('introNextStats');
+        const introOverlayStats = document.getElementById('introOverlayStats');
+        let introIndexStats = 0;
+
+        function showNextIntroStats() {
+            const page = document.querySelector('.page');
+            if (introIndexStats === 0) page.classList.add('blurred');
+            if (introIndexStats >= introParagraphsStats.length) {
+                introOverlayStats.style.display = 'none';
+                page.classList.remove('blurred');
+                return;
+            }
+            const p = document.createElement('div');
+            p.className = 'intro-card';
+            p.innerText = introParagraphsStats[introIndexStats];
+            p.style.animationDelay = (introIndexStats * 90) + 'ms';
+            introStackStats.appendChild(p);
+            introIndexStats += 1;
+            if (introIndexStats >= introParagraphsStats.length) introNextStats.textContent = 'Enter';
+        }
+
+                introNextStats.addEventListener('click', showNextIntroStats);
+
+                // Only auto-show the intro if the user navigated here from the home page
+                try {
+                    const prev = sessionStorage.getItem('lastPage');
+                    if (prev === 'home') {
+                        showNextIntroStats();
+                    } else {
+                        // hide overlay immediately if not from home
+                        introOverlayStats.style.display = 'none';
+                    }
+                    // clear the flag so it won't trigger again
+                    sessionStorage.removeItem('lastPage');
+                } catch (e) {
+                    // if sessionStorage isn't available, default to showing the overlay
+                    showNextIntroStats();
+                }
+
+        // conclusion overlay content (exact user text)
+        const conclusionParagraphs = [
+            `From the first study, we see there is an economic benefit to adopting some of the cultural norms of the host country. However, from the second study, we see that integration, where one maintains their old cultural norms, actually yields better results in terms of psychological well-being. `,
+            `This supports the idea of balance of identities, where the immigrant can gain economic opportunities through adaptation while still maintaining their original cultural identity to protect psychological well-being. `,
+            `By exploring success through avenues outside of just economic and social mobility, we move away from the narrow trap of success the American dream often implies, and in turn, its ideas related to assimilation.`,
+            `Putting it all together to answer the thematic question, the American dream promotes a narrow and often unattainable version of success that often requires a radical transformation of identity to pursue. However, by looking at a more broad version of success encompassing more than just economic growth, we can see that achieving true success may often involve some adaptations, but it should not require a fundamental change in identity that erases one’s original culture or sense of self. `
+        ];
+
+        const conclusionStack = document.getElementById('conclusionStack');
+        const conclusionNext = document.getElementById('conclusionNext');
+        const conclusionOverlay = document.getElementById('conclusionOverlay');
+        const conclusionCard = document.getElementById('conclusionCard');
+        let conclusionIndex = 0;
+
+        function showNextConclusion() {
+            const page = document.querySelector('.page');
+            if (conclusionIndex === 0) page.classList.add('blurred');
+            if (conclusionIndex >= conclusionParagraphs.length) {
+                conclusionOverlay.style.display = 'none';
+                page.classList.remove('blurred');
+                return;
+            }
+            const p = document.createElement('div');
+            p.className = 'intro-card';
+            p.innerText = conclusionParagraphs[conclusionIndex];
+            p.style.animationDelay = (conclusionIndex * 90) + 'ms';
+            conclusionStack.appendChild(p);
+            conclusionIndex += 1;
+            if (conclusionIndex >= conclusionParagraphs.length) conclusionNext.textContent = 'Close';
+        }
+
+        conclusionNext.addEventListener('click', showNextConclusion);
+
+        conclusionCard.addEventListener('click', function (e) {
+            e.preventDefault();
+            conclusionOverlay.style.display = 'flex';
+            conclusionStack.innerHTML = '';
+            conclusionIndex = 0;
+            showNextConclusion();
+        });
+    </script>
+
+</body>
+</html>

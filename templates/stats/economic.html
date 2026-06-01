@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Economic Study</title>
+</head>
+<body>
+
+    <a class="home-btn" href="/">Home</a>
+
+    <div class="page stats-page">
+        <h1>{{ title }}</h1>
+        <div class="study-top">
+            <div class="study-col">
+                <div class="image-placeholder">
+                    <img src="/static/images/table.png" alt="Table" style="max-width:100%; border-radius:8px;"/>
+                </div>
+                <div class="bullets-wrapper">
+                    <ul class="bullet-preview">
+                        <li>This table compares social concerns of immigrants and German citizens and finds that immigrants with more similar concerns to those of native Germans tend to experience higher wage growth in Germany</li>
+                        <li>The data from the table indicates that every 1 standard deviation decrease in social concern distance is associated with a 0.7% increase in annual wage growth</li>
+                        <li>In other words, immigrants who whose attitudes are more culturally similar to native born citizens experience higher wage growth</li>
+                        <li><strong>This study indicates that some degree of adaptation may promote economic success, while leaving open the possibility for immigrants to maintain some elements of their original culture</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="study-col">
+                <div class="image-placeholder">
+                    <img src="/static/images/chart.png" alt="Chart" style="max-width:100%; border-radius:8px;"/>
+                </div>
+                <div class="bullets-wrapper">
+                    <ul class="bullet-preview">
+                        <li>This graph shows the relationship between wages and years since migration to Germany, where the country in black represents the country closer in language or religion to Germany out of the two</li>
+                        <li>Both charts show that although there is an initial economic benefit to cultural familiarity, this gap converges over time, indicating that immigrants can achieve upward social mobility though adaptation</li>
+                        <li>The charts support the idea that adaption of the host countries values and practices is beneficial for economic growth, however like the table, it does not argue that immigrants must completely abandon their own culture and values</li>
+                        <li><strong>Both charts show that although there is an initial economic benefit to cultural familiarity, this gap converges over time, indicating that immigrants can achieve upward social mobility though adaptation</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="study-body">
+            <p>{{ analysis }}</p>
+        </div>
+
+        <div style="margin-top:18px">
+            <a class="card" href="/stats">Back to Studies</a>
+        </div>
+    </div>
+
+</body>
+</html>

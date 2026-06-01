@@ -1,0 +1,18 @@
+<h1>Gatsby Summary</h1>
+
+{%- if bullets %}
+<p>Key points for the selected quote:</p>
+<ul>
+    {%- for b in bullets %}
+    <li>{{ b }}{% if not b.endswith('.') %}.{% endif %}</li>
+    {%- endfor %}
+</ul>
+{%- else %}
+<ul>
+        <li>Theme: Illusion of the American Dream</li>
+        <li>Theme: Time and regret</li>
+        <li>Theme: Wealth vs reality</li>
+</ul>
+{%- endif %}
+
+<a href="/gatsby">Back</a>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Immigrant Experience</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <a class="home-btn" href="/">Home</a>
+
+        <div class="intro-overlay" id="introOverlayImm">
+            <div class="intro-wrap">
+                <div class="intro-stack" id="introStackImm">
+                </div>
+                <div class="intro-controls">
+                    <div style="color:rgba(255,255,255,0.7)">Press Next to reveal more</div>
+                    <button class="intro-btn" id="introNextImm">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page immigrant-page">
+
+        <h1 class="title">Immigrant Experience</h1>
+
+        <div class="top-row">
+            {%- for q in quotes[:2] %}
+            <div class="flip-card large card" data-qid="{{ q.id }}">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <div class="quote-text">{{ q.quote }}</div>
+                    </div>
+                    <div class="flip-back">
+                        <div class="analysis-text">{{ q.analysis }}</div>
+                        
+                    </div>
+                </div>
+            </div>
+            {%- endfor %}
+        </div>
+
+        {%- if quotes|length > 2 %}
+        <div class="bottom-row">
+            <div class="flip-card large wide card" data-qid="{{ quotes[2].id }}">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <div class="quote-text">{{ quotes[2].quote }}</div>
+                    </div>
+                    <div class="flip-back">
+                        <div class="analysis-text">{{ quotes[2].analysis }}</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%- endif %}
+
+        
+
+
+                </div>
+
+                <script>
+            document.addEventListener('click', function (e) {
+                const card = e.target.closest('.flip-card');
+                if (!card) return;
+                if (e.target.closest('.card-actions')) return;
+                card.classList.toggle('flipped');
+            });
+        </script>
+
+                <script>
+                    
+                    const introParagraphsImm = [
+                        `Similarly to how The Great Gatsby warns against the dangers of radical reinvention in pursuit of the American Dream, Viet Thanh Nguyen argues that complete assimilation, where an immigrant abandons their original culture to pursue success, ultimately leads to pursuit of a goal that proves illusive.`,
+                        `Instead, Nguyen argues that adaptation and integration are the best ways to pursue success, whereby the immigrant not only adopts some of the values from their new country’s culture, but also maintains their old cultural identity.`,
+                        `Let’s explore two of his works, “On True War Stories” and “On Being a Refugee, an American—and a Human Being:” to explore this idea…`
+                    ];
+
+                    const introStackImm = document.getElementById('introStackImm');
+                    const introNextImm = document.getElementById('introNextImm');
+                    const introOverlayImm = document.getElementById('introOverlayImm');
+                    let introIndexImm = 0;
+
+                    function showNextIntroImm() {
+                        const page = document.querySelector('.page');
+                        if (introIndexImm === 0) page.classList.add('blurred');
+                        if (introIndexImm >= introParagraphsImm.length) {
+                            introOverlayImm.style.display = 'none';
+                            page.classList.remove('blurred');
+                            return;
+                        }
+                        const p = document.createElement('div');
+                        p.className = 'intro-card';
+                        p.innerText = introParagraphsImm[introIndexImm];
+                        p.style.animationDelay = (introIndexImm * 90) + 'ms';
+                        introStackImm.appendChild(p);
+                        introIndexImm += 1;
+                        if (introIndexImm >= introParagraphsImm.length) introNextImm.textContent = 'Enter';
+                    }
+
+                    introNextImm.addEventListener('click', showNextIntroImm);
+                    showNextIntroImm();
+                </script>
+
+</body>
+</html>

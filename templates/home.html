@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1 class="title">Identity and the American Dream</h1>
+<p class="subtitle">How does the pursuit of the American dream lead one to change or even completely re-invent their identity? Does this transformation lead to meaningful success?</p>
+
+<div class="page home-page">
+  <div class="top-row">
+    <a href="/gatsby" class="card large">
+      <h2>The Great Gatsby</h2>
+      <p>Consequences of radical reinvention of identity</p>
+    </a>
+
+    <a href="/immigrant" class="card large">
+      <h2>Immigrant Experience</h2>
+      <p>A bthealance of multiple identities</p>
+    </a>
+  </div>
+
+  <div class="bottom-row">
+    <a href="/stats" class="card large wide" id="statsLink">
+      <h2>Looking at the Data</h2>
+      <p>Assimilation vs Integration</p>
+    </a>
+  </div>
+
+  <script>
+    // mark that the user came from home when they click the studies link
+    const statsLink = document.getElementById('statsLink');
+    if (statsLink) {
+      statsLink.addEventListener('click', function () {
+        try { sessionStorage.setItem('lastPage', 'home'); } catch (e) { /* ignore */ }
+      });
+    }
+  </script>
+</div>
+
+</body>
+</html>

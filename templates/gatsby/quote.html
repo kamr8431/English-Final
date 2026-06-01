@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quote Analysis</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <a class="home-btn" href="/">Home</a>
+
+    <h1>Quote Analysis</h1>
+
+    <div class="analysis-layout">
+
+      <div class="analysis-main card">
+        <h2>Full Analysis</h2>
+        <p>{{ quote.analysis }}</p>
+      </div>
+
+      <aside class="analysis-side card">
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li>Main idea insight</li>
+          <li>Theme connection</li>
+          <li>Literary technique</li>
+        </ul>
+      </aside>
+
+    </div>
+
+    <div class="analysis-image card">
+      <h2>Illustration / Image</h2>
+      <div class="image-placeholder">(Add image here)</div>
+    </div>
+
+    <div class="split">
+      <a class="card" href="{{ back_url }}">Back</a>
+      <a class="card" href="{{ next_url }}">Next</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

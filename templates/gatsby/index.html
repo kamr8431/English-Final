@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gatsby</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <a class="home-btn" href="/">Home</a>
+
+    <div class="page gatsby-page">
+
+        <h1 class="title">Great Gatsby Quotes</h1>
+
+                <div class="intro-overlay" id="introOverlay">
+                    <div class="intro-wrap">
+                        <div class="intro-stack" id="introStack">
+                            
+                        </div>
+                        <div class="intro-controls">
+                            <div style="color:rgba(255,255,255,0.7)">Press Next to reveal more</div>
+                            <button class="intro-btn" id="introNext">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+        <div class="top-row">
+            {%- for q in quotes[:2] %}
+            <div class="flip-card large card" data-qid="{{ q.id }}">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <div class="quote-text">{{ q.quote }}</div>
+                    </div>
+                    <div class="flip-back">
+                        <div class="analysis-text">{{ q.analysis }}</div>
+                        
+                    </div>
+                </div>
+            </div>
+            {%- endfor %}
+        </div>
+
+        {%- if quotes|length > 2 %}
+        <div class="bottom-row">
+            <div class="flip-card large wide card" data-qid="{{ quotes[2].id }}">
+                <div class="flip-inner">
+                    <div class="flip-front">
+                        <div class="quote-text">{{ quotes[2].quote }}</div>
+                    </div>
+                    <div class="flip-back">
+                        <div class="analysis-text">{{ quotes[2].analysis }}</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%- endif %}
+
+        
+
+    </div>
+            <script>
+                document.addEventListener('click', function (e) {
+                    const card = e.target.closest('.flip-card');
+                    if (!card) return;
+                    if (e.target.closest('.card-actions')) return;
+                    card.classList.toggle('flipped');
+                });
+                            </script>
+                            <script>
+                                const introParagraphs = [
+                                    `The Great Gatsby, by Fitzgerald, showcases the extreme end of how the pursuit of the American Dream can lead one to alter their identity.`,
+                                    `The novel follows Gatsby as he pursues wealth and status, believing that through sheer self-determination he can rewrite the past and his identity in order to will the idealized future he envisions into existence.`,
+                                    `However, as Gatsby's dreams begin to collapse, the reader starts to understand the limits of reinvention and how denying reality altogether creates an illusion of success that is ultimately unattainable.`,
+                                    `Let’s dive deeper into the text to explore these ideas…`
+                                ];
+
+                                const introStack = document.getElementById('introStack');
+                                const introNext = document.getElementById('introNext');
+                                const introOverlay = document.getElementById('introOverlay');
+                                let introIndex = 0;
+
+                                  function showNextIntro() {
+                                                                const page = document.querySelector('.page');
+                                                                
+                                                                if (introIndex === 0) page.classList.add('blurred');
+                                                                if (introIndex >= introParagraphs.length) {
+                                                                    
+                                                                    introOverlay.style.display = 'none';
+                                                                    page.classList.remove('blurred');
+                                                                    return;
+                                                                }
+                                    const p = document.createElement('div');
+                                    p.className = 'intro-card';
+                                    p.innerText = introParagraphs[introIndex];
+                                    
+                                    p.style.animationDelay = (introIndex * 90) + 'ms';
+                                    introStack.appendChild(p);
+                                    introIndex += 1;
+                                    
+                                    if (introIndex >= introParagraphs.length) {
+                                        introNext.textContent = 'Enter';
+                                    }
+                                }
+
+                                introNext.addEventListener('click', showNextIntro);
+                                
+                                showNextIntro();
+                            </script>
+</body>
+
+</html>
